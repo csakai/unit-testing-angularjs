@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html ng-app="app">
+    <head>
+        <title>Unit Testing with Angular</title>
+    </head>
+    <body>
+        <ui-view>
+        </ui-view>
+        <% deps.forEach(function(dep) { %>
+            <script type="text/javascript" src="<%= dep %>"></script>
+        <% }); %>
+        
+    </body>
+</html>
