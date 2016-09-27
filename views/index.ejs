@@ -4,11 +4,13 @@
         <title>Unit Testing with Angular</title>
     </head>
     <body>
-        <ui-view>
-        </ui-view>
-        <% deps.forEach(function(dep) { %>
-            <script type="text/javascript" src="<%= dep %>"></script>
+        <ui-view></ui-view>
+        <% vendor_deps.forEach(function(dep) { %>
+            <script type="text/javascript" src="vendor/<%= dep %>"></script>
         <% }); %>
-        
+
+        <% src_deps.forEach(function(dep) { %>
+            <script type="text/javascript" src="src/<%= dep %>"></script>
+        <% }); %>
     </body>
 </html>
