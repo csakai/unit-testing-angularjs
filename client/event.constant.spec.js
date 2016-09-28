@@ -5,6 +5,7 @@ describe('app#constants', function() {
                 expect(EVENTS.CLICK).toBeDefined();
                 expect(EVENTS.CLICK).toBe('click');
             });
+            inject();
         });
     });
     describe('you could check after config too, EVENTS', function() {
