@@ -1,7 +1,8 @@
 /*jshint node:true*/
 'use strict';
 
-var express = require('express'),
+var _ = require('lodash'),
+    express = require('express'),
     bodyParser = require('body-parser'),
     glob = require('glob'),
     path = require('path'),
@@ -15,6 +16,20 @@ var express = require('express'),
         ignore: ['**/*.module.js', '**/*.spec.js']
     })),
     vendor_deps = require('./client-deps');
+
+(function(arr) {
+    var patterns = [ /^angular\//i, /^jquery\//i ];
+    var wrapped = _.chain(arr);
+    for (var i = 0, j = patterns.length; i < j; i++) {
+        wrapped
+            .findIndex(patterns[i].test.bind(patterns[i]))
+            .thru(function(index) {
+                arr.unshift(arr.splice(index, 1)[0]);
+                return arr;
+            })
+            .commit();
+    }
+})(vendor_deps);
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
