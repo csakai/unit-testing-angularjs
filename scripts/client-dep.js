@@ -24,7 +24,7 @@ function stripSpaces(str) {
 function wrapDeps(deps) {
     return 'module.exports = [' +
         newLineWithIndent +
-        sortAndUniq(deps, stripSpaces).join(',' + newLineWithIndent) +
+        sortAndUniq(deps, true, stripSpaces).join(',' + newLineWithIndent) +
         '\n];\n';
 }
 
@@ -32,16 +32,20 @@ function identity(foo) {
     return foo;
 }
 
-function sortAndUniq(arr, perElemCb) {
+function sortAndUniq(arr, shouldCompact, perElemCb) {
     var cb = perElemCb || identity;
     var currentIndex = -1;
-    return arr.map(perElemCb).sort().reduce(function(acc, elem, index, arr) {
-        if (!index || acc[currentIndex] !== elem) {
-            acc.push(elem);
-            currentIndex++;
-        }
-        return acc;
-    }, []);
+    return arr.map(cb)
+        .sort()
+        .reduce(function(acc, elem, index, arr) {
+            var shouldAddElem = !shouldCompact || elem,
+                isNotDuplicate = ~currentIndex || acc[currentIndex] !== elem;
+            if (shouldAddElem && isNotDuplicate) {
+                acc.push(elem);
+                currentIndex++;
+            }
+            return acc;
+        }, []);
 }
 
 function readWriteAsync(filename, newDeps) {
@@ -52,7 +56,8 @@ function readWriteAsync(filename, newDeps) {
             throw err;
         } else if (!err) {
             deps = data
-                .split(/(\[\n|\n\])/gm)[1]
+                .split(/\[/)[1]
+                .split(/\];/)[0]
                 .split(',\n')
         }
         newDeps = newDeps.map(function(dep) {

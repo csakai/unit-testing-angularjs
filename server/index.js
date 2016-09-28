@@ -12,7 +12,7 @@ var express = require('express'),
         ignore: '**/*.spec.js'
     }).concat(glob.sync('**/*.js', {
         cwd: 'client',
-        ignore: '**/*.spec.js'
+        ignore: ['**/*.module.js', '**/*.spec.js']
     })),
     vendor_deps = require('./client-deps');
 
