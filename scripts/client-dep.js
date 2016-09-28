@@ -1,7 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var newLineWithIndent = '\n    ';
-var filename = path.join('server', 'client-deps.js');
+var filename = path.join('server', 'vendor-deps.js');
+var reorder = require('./reorder_vendor');
 
 function getMain(pkgName) {
     var pkg;
@@ -60,6 +61,7 @@ function readWriteAsync(filename, newDeps) {
                 .split(/\];/)[0]
                 .split(',\n')
         }
+        reoder(newDeps);
         newDeps = newDeps.map(function(dep) {
             return '"' + getMain(stripVer(dep)) + '"';
         });
