@@ -22,6 +22,10 @@ app.get('/ping', function(req, res, next) {
 app.use("/src", express.static(path.resolve(__dirname + "/../client/")));
 app.use("/assets", express.static(path.resolve(__dirname + "/../client/assets")));
 app.use("/vendor", express.static(path.resolve(__dirname + "/../node_modules/")));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Headers", "App-Name");
+    next();
+});
 app.use("/api", routes); 
 
 app.use(require('./util/error_handler'));
