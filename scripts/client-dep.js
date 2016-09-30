@@ -49,7 +49,7 @@ function sortAndUniq(arr, shouldCompact, perElemCb) {
         }, []);
 }
 
-function readWriteAsync(filename, newDeps) {
+function addNewDeps(filename, newDeps) {
     fs.readFile(filename, 'utf-8', function(err, data){
         var deps = [];
         var fileText;
@@ -74,4 +74,4 @@ function readWriteAsync(filename, newDeps) {
 }
 var deps = process.argv.slice(2);
 
-readWriteAsync(filename, deps);
+addNewDeps(filename, deps);
