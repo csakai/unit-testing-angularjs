@@ -1,1 +1,7 @@
-{"items":["foo","bar","baz","nurrr"]}
+{
+    "items": [
+        "foo",
+        "bar",
+        "baz"
+    ]
+}
