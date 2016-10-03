@@ -4,7 +4,10 @@
         <title>Unit Testing with Angular</title>
     </head>
     <body>
-        <ui-view></ui-view>
+        <div ng-controller="appCtrl as app">
+            <item-container ng-if="app.items" items="app.items">
+            </item-container>
+        </div>
         <% vendor_deps.forEach(function(dep) { %>
             <script type="text/javascript" src="vendor/<%= dep %>"></script>
         <% }); %>

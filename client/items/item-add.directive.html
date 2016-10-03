@@ -1,0 +1,17 @@
+<hr />
+<form
+    name="AddCtrl.itemForm"
+    ng-submit="AddCtrl.addItem()"
+    novalidate>
+    <label for="item-adder">Item Name:</label>
+    <input
+        id="item-adder"
+        type="text"
+        name="item"
+        ng-model="AddCtrl.item"
+        ng-required="true" />
+    <input
+        type="submit"
+        value="Add!"
+        ng-disabled="AddCtrl.addingItem" />
+</form>
