@@ -4,7 +4,7 @@
         return {
             link: linkFn,
             restrict: 'E',
-            require: '^itemContainer',
+            require: '^^itemContainer',
             scope: {
                 items: '='
             },

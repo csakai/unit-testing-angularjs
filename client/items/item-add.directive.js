@@ -2,7 +2,7 @@
     var app = angular.module('app.items');
     app.directive('itemAdd', function() {
         return {
-            require: '^itemContainer',
+            require: '^^itemContainer',
             restrict: 'E',
             scope: {},
             link: linkFn,
