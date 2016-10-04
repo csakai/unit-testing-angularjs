@@ -4,6 +4,7 @@
   "description": "A really simple angularjs app, strictly for showing how to unit test it.",
   "main": "./server/index.js",
   "scripts": {
+    "build-templates": "node scripts/build-template-cache.js",
     "client-dep": "./scripts/client-dep",
     "start": "node server/index.js",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
@@ -16,7 +17,6 @@
   "license": "MIT",
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-ui-router": "^0.3.1",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "ejs": "^2.5.2",
@@ -32,6 +32,7 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-mocha-reporter": "^2.2.0",
-    "karma-phantomjs-launcher": "^1.0.2"
+    "karma-phantomjs-launcher": "^1.0.2",
+    "ng-html2js": "^3.0.0"
   }
 }
