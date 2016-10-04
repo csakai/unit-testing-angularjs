@@ -19,6 +19,7 @@ module.exports = function(config) {
             return 'node_modules/' + dep;
         }).concat([
             'node_modules/angular-mocks/angular-mocks.js',
+            'mocks/**/*.js',
             'client/**/*.module.js',
             'client/**/*.js',
             'client/**/*.spec.js'
