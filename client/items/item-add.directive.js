@@ -13,30 +13,31 @@
 
         function linkFn(scope, el, attr, containerCtrl) {
             _.assign(scope, containerCtrl);
-
-            scope.addingItem = false;
+            scope.AddCtrl.addingItem = false;
+            scope.AddCtrl.item = '';
         }
 
         function controller($scope, Items) {
-            this.item = '';
             this.addItem = function() {
-                if (!this.itemForm.$valid || $scope.addingItem) {
+                if (!this.itemForm.$valid || this.addingItem) {
                     return;
                 }
-                $scope.addingItem = true;
+                this.addingItem = true;
                 var item = this.item;
                 this.item = '';
 
                 $scope.addItem(item);
-                Items.add(item)
-                    .then($scope.addSucceeded.bind($scope, item))
+                return Items.add(item)
+                    .then(function() {
+                        $scope.addSucceeded(item);
+                    })
                     .catch((function(err) {
                         $scope.addFailed(item);
                         this.item = item;
                     }).bind(this))
-                    .finally(function() {
-                        $scope.addingItem = false;
-                    });
+                    .finally((function() {
+                        this.addingItem = false;
+                    }).bind(this));
             };
         }
     });

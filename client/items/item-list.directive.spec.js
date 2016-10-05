@@ -17,16 +17,15 @@ describe('item-list', function() {
 
     beforeEach(inject(function($compile, _$log_, $rootScope) {
         $log = _$log_;
-        var elem = Mocks.createFakeParentElement({
+        scope = $rootScope.$new(true);
+        scope.items = angular.copy(fakeItems);
+        var elem = Mocks.createFakeParentElement($compile, scope, {
             name: 'itemContainer',
             methods: itemContainerMockMethods,
             props: itemContainerMockProps
         }, 'item-list', {
             items: 'items'
         });
-        scope = $rootScope.$new(true);
-        scope.items = angular.copy(fakeItems);
-        $compile(elem)(scope);
         scope.$digest();
         elem = elem.find('item-list');
     }));

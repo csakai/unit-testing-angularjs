@@ -3,7 +3,7 @@ beforeEach(function() {
         var start = '<' + name;
         var end = '</' + name + '>';
         if (attr) {
-            start += ' ' + attr;
+            start += attr;
         }
         start += '>';
         return start + end;
@@ -12,14 +12,14 @@ beforeEach(function() {
     function _createElementWithScope(elem, scope) {
         var attrStr = '';
         _.forEach(scope, function(val, key) {
-            attrStr += key + '="' + val + '" ';
+            attrStr += ' ' + key + '="' + val + '"';
         });
         return _createElement(elem, attrStr);
     }
 
     function _createParentChildStr(parent, child, childScope) {
-        var start = '<' + parent + '>';
-        var end = '</' + parent + '>';
+        var start = '<div>';
+        var end = '</div>';
         child = _createElementWithScope(child, childScope);
         return start+child+end;
     }
@@ -28,7 +28,7 @@ beforeEach(function() {
         return '$' + name + 'Controller';
     }
     window.Mocks = {
-        createFakeParentElement: function(parentObj, childName, childScope) {
+        createFakeParentElement: function($compile, scope, parentObj, childName, childScope) {
             var parentCtrlMock = {};
             var element;
             if (parentObj.methods) {
@@ -38,7 +38,9 @@ beforeEach(function() {
             parentObj.props && _.assign(parentCtrlMock, parentObj.props);
             element = _createParentChildStr(parentObj.name, childName, childScope);
             element = angular.element(element);
+            element = $compile(element)(scope);
             element.data(_createFakeParentData(parentObj.name), parentCtrlMock);
+            element = element.find(childName);
             return element;
         },
         spies: {}
