@@ -15,7 +15,7 @@ describe('item-add', function() {
         inject(function($compile, _$q_, $rootScope, _Items_) {
             $q = _$q_;
             Items = _Items_;
-            scope = $rootScope.$new();
+            scope = $rootScope.$new(true);
             var elem = Mocks.createFakeParentElement($compile, scope, {
                 name: 'itemContainer',
                 methods: ItemContainerMockMethods

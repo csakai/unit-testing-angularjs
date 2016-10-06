@@ -28,6 +28,12 @@ beforeEach(function() {
         return '$' + name + 'Controller';
     }
     window.Mocks = {
+        createDirective: function($compile, scope, directiveName) {
+            var elem = _createElement(directiveName);
+            elem = angular.element(elem);
+            elem = $compile(elem)(scope);
+            return elem;
+        },
         createFakeParentElement: function($compile, scope, parentObj, childName, childScope) {
             var parentCtrlMock = {};
             var element;
