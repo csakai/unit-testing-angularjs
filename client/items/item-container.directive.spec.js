@@ -8,8 +8,8 @@ describe('item-container', function() {
 
     beforeEach(module('app.items', 'app.items.directives.mocks'));
 
-    beforeEach(inject(function($compile, _$rootScope_) {
-        scope = _$rootScope_.$new(true);
+    beforeEach(inject(function($compile, $rootScope) {
+        scope = $rootScope.$new(true);
         var element = Mocks.createDirective($compile, scope, 'item-container');
         scope.$digest();
         scope = element.isolateScope();

@@ -1,4 +1,5 @@
 describe('item-add', function() {
+    var $q;
     var scope;
     var Items;
     var $controller;
